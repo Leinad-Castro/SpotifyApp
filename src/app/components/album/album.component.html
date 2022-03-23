@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-3">
+            <img class="img-fluid h-100" [src]="album.images[0].url" alt="">
+        </div>
+        <div class="col align-self-end">
+            <h6>Álbum</h6>
+            <h1>{{album.name}}</h1>
+            <small>{{album.release_date}}</small>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-borderless text-white">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Artistas</th>
+                        <th scope="col">Tiempo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of album.tracks.items; let i = index">
+                        <th scope="row">{{(i+1)}}</th>
+                        <td>{{track.name}}</td>
+                        <td>
+                            {{track.artists[0].name}} {{track.artists[1]?.name}} {{track.artists[2]?.name}}
+                        </td>
+                        <td>{{(track.duration_ms/1000/60)|number:'1.0-2'}} min</td>
+                        <td>
+                            <iframe [src]="track.uri | domseguro" width="300" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
